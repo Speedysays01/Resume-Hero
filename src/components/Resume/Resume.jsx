@@ -27,7 +27,7 @@ const Resume = forwardRef((props, ref) => {
     education: information[sections.education],
     basicInfo: information[sections.basicInfo],
     summary: information[sections.summary],
-    other: information[sections.other],
+    skills: information[sections.skills],
   };
 
   const getFormattedDate = (value) => {
@@ -240,19 +240,19 @@ const Resume = forwardRef((props, ref) => {
         </div>
       </div>
     ),
-    [sections.other]: (
+    [sections.skills]: (
       <div
-        key={"other"}
+        key={"skills"}
         draggable
-        onDragOver={() => seTarget(info.other?.id)}
-        onDragEnd={() => setSource(info.other?.id)}
+        onDragOver={() => seTarget(info.skills?.id)}
+        onDragEnd={() => setSource(info.skills?.id)}
         className={`${styles.section} ${
-          info.other?.sectionTitle ? "" : styles.hidden
+          info.skills?.sectionTitle ? "" : styles.hidden
         }`}
       >
-        <div className={styles.sectionTitle}>{info.other?.sectionTitle}</div>
+        <div className={styles.sectionTitle}>{info.skills?.sectionTitle}</div>
         <div className={styles.content}>
-          <p className={styles.overview}>{info?.other?.detail}</p>
+          <p className={styles.overview}>{info?.skills?.detail}</p>
         </div>
       </div>
     ),
@@ -288,7 +288,7 @@ const Resume = forwardRef((props, ref) => {
   useEffect(() => {
     setColumns([
       [sections.project, sections.education, sections.summary],
-      [sections.workExp, sections.achievement, sections.other],
+      [sections.workExp, sections.achievement, sections.skills],
     ]);
   }, []);
 
@@ -305,11 +305,11 @@ const Resume = forwardRef((props, ref) => {
 
   return (
     <div ref={ref}>
-      <div ref={containerRef} className={styles.container}>
+      <div ref={containerRef} className={`${styles.container} ${styles.noBorder} `}>
         <div className={styles.header}>
           <p className={styles.heading}>{info.basicInfo?.detail?.name}</p>
           <p className={styles.subHeading}>{info.basicInfo?.detail?.title}</p>
-
+       
           <div className={styles.links}>
             {info.basicInfo?.detail?.email ? (
               <a className={styles.link} type="email">
@@ -339,8 +339,11 @@ const Resume = forwardRef((props, ref) => {
             ) : (
               <span />
             )}
+
           </div>
         </div>
+
+        <hr/>
 
         <div className={styles.main}>
           <div className={styles.col1}>

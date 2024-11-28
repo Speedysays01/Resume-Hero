@@ -8,7 +8,7 @@ import Resume from "../Resume/Resume";
 import styles from "./Body.module.css";
 
 function Body() {
-  const colors = ["#239ce2", "#48bb78", "#0bc5ea", "#a0aec0", "#ed8936"];
+  const colors = ["#239ce2", "#47663B", "#0bc5ea", "#740938", "#6A42C2"];
   const sections = {
     basicInfo: "Basic Info",
     workExp: "Work Experience",
@@ -61,9 +61,10 @@ function Body() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.heading}>Resume Builder</p>
+
       <div className={styles.toolbar}>
         <div className={styles.colors}>
+          <h3>Choose a color: </h3>
           {colors.map((item) => (
             <span
               key={item}
