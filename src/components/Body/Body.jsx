@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import ReactToPrint from "react-to-print";
 import { ArrowDown } from "react-feather";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import Editor from "../Editor/Editor";
 import Resume from "../Resume/Resume";
@@ -20,6 +23,7 @@ function Body() {
   };
   const resumeRef = useRef();
 
+  const downloadToast = ()=> toast("Mission accomplished—your resume is ready to shine!");
   const [activeColor, setActiveColor] = useState(colors[0]);
   const [resumeInformation, setResumeInformation] = useState({
     [sections.basicInfo]: {
@@ -79,12 +83,17 @@ function Body() {
         <ReactToPrint
           trigger={() => {
             return (
-              <button>
+              <button >
                 Download <ArrowDown />
               </button>
             );
           }}
           content={() => resumeRef.current}
+          onAfterPrint={downloadToast}
+        />
+        <ToastContainer
+         autoClose={3000}
+          theme="light"
         />
       </div>
       <div className={styles.main}>
