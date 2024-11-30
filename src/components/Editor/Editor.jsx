@@ -5,20 +5,28 @@ import InputControl from "../InputControl/InputControl";
 
 import styles from "./Editor.module.css";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Editor(props) {
   const sections = props.sections;
   const information = props.information;
 
+  const saveToast = () => toast("Info Saved...ResumeHero in progress!");
+
   const [activeSectionKey, setActiveSectionKey] = useState(
     Object.keys(sections)[0]
   );
+
   const [activeInformation, setActiveInformation] = useState(
     information[sections[Object.keys(sections)[0]]]
   );
+
   const [activeDetailIndex, setActiveDetailIndex] = useState(0);
   const [sectionTitle, setSectionTitle] = useState(
     sections[Object.keys(sections)[0]]
   );
+
   const [values, setValues] = useState({
     name: activeInformation?.detail?.name || "",
     title: activeInformation?.detail?.title || "",
@@ -56,7 +64,6 @@ function Editor(props) {
         />
       </div>
       <div className={styles.row}>
-    
         <InputControl
           label="Location"
           placeholder="Enter location eg. Remote/City name"
@@ -94,10 +101,10 @@ function Editor(props) {
           value={values.points ? values.points[0] : ""}
           onChange={(event) => handlePointUpdate(event.target.value, 0)}
         />
-
       </div>
     </div>
   );
+
   const projectBody = (
     <div className={styles.detail}>
       <div className={styles.row}>
@@ -136,9 +143,9 @@ function Editor(props) {
           }
         />
       </div>
-  
     </div>
   );
+
   const educationBody = (
     <div className={styles.detail}>
       <div className={styles.row}>
@@ -181,6 +188,7 @@ function Editor(props) {
       </div>
     </div>
   );
+
   const basicInfoBody = (
     <div className={styles.detail}>
       <div className={styles.row}>
@@ -239,6 +247,7 @@ function Editor(props) {
       </div>
     </div>
   );
+
   const achievementsBody = (
     <div className={styles.detail}>
       <div className={styles.column}>
@@ -266,6 +275,7 @@ function Editor(props) {
       </div>
     </div>
   );
+
   const summaryBody = (
     <div className={styles.detail}>
       <InputControl
@@ -278,6 +288,7 @@ function Editor(props) {
       />
     </div>
   );
+
   const skillsBody = (
     <div className={styles.detail}>
       <InputControl
@@ -440,6 +451,11 @@ function Editor(props) {
     }
   };
 
+  const handleClick = () => {
+    handleSubmission();
+    saveToast();
+  };
+
   const handleAddNew = () => {
     const details = activeInformation?.details;
     if (!details) return;
@@ -491,9 +507,7 @@ function Editor(props) {
       companyName: activeInfo?.details
         ? activeInfo.details[0]?.companyName || ""
         : "",
-      college: activeInfo?.details
-        ? activeInfo.details[0]?.college || ""
-        : "",
+      college: activeInfo?.details ? activeInfo.details[0]?.college || "" : "",
       location: activeInfo?.details
         ? activeInfo.details[0]?.location || ""
         : "",
@@ -557,11 +571,10 @@ function Editor(props) {
               activeSectionKey === key ? styles.active : ""
             }`}
             key={key}
-            onClick={() => { 
-              setActiveSectionKey(key); 
-              handleSubmission(); 
+            onClick={() => {
+              setActiveSectionKey(key);
+              handleSubmission();
             }}
-            
           >
             {sections[key]}
           </div>
@@ -610,7 +623,12 @@ function Editor(props) {
 
         {generateBody()}
 
-        <button onClick={handleSubmission}>Save</button>
+        <button onClick={handleClick}>Save</button>
+        <ToastContainer
+          autoClose={2000}
+          theme="light"
+          
+          />
       </div>
     </div>
   );
