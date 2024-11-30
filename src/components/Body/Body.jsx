@@ -66,6 +66,14 @@ function Body() {
   return (
     <div className={styles.container}>
 
+      <p>Provide the details for your dream resume</p>
+
+<Editor
+          sections={sections}
+          information={resumeInformation}
+          setInformation={setResumeInformation}
+        />
+
       <div className={styles.toolbar}>
         <div className={styles.colors}>
           <h3>Choose a color: </h3>
@@ -97,11 +105,7 @@ function Body() {
         />
       </div>
       <div className={styles.main}>
-        <Editor
-          sections={sections}
-          information={resumeInformation}
-          setInformation={setResumeInformation}
-        />
+         <p>Resume Preview</p>
         <Resume
           ref={resumeRef}
           sections={sections}
